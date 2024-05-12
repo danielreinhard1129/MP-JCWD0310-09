@@ -5,8 +5,10 @@ import Link from 'next/link';
 import React from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <>
       <nav className=" text-whites bg-woodsmokey ">
@@ -42,8 +44,8 @@ const Navbar = () => {
                 <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
                   <Link href={'/login'}>Log In</Link>
                 </Badge>
-                <Badge className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints">
-                  <Link href={'/register'}>Register</Link>
+                <Badge className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints" onClick={() => router.push('/register')}>
+                  <h5>Register</h5>
                 </Badge>
               </div>
             </div>
