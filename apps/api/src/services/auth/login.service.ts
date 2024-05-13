@@ -1,7 +1,6 @@
 import prisma from "@/prisma";
 import { User } from "@prisma/client";
 import { sign } from "jsonwebtoken";
-import { compare } from "bcrypt";
 import { comparePassword } from "@/lib/bcrypt";
 import { JWT_SECRET } from "@/config";
 

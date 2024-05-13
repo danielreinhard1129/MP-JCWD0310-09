@@ -1,27 +1,24 @@
 'use client';
 
+import React from 'react'
 import FormInput from '@/components/FormInput';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Loader2 } from "lucide-react";
 import { useFormik } from 'formik';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import useForgotPassword from '@/hooks/api/auth/useForgotPassword';
 
-import React from 'react'
-import { validationSchema } from './validationSchema';
-import useLogin from '@/hooks/api/auth/useLogin';
-import { useRouter } from 'next/navigation';
 
-const Login = () => {
-    const router = useRouter();
-    const { login } = useLogin();
+const ForgotPassword = () => {
+    const { forgotPassword, isLoading } = useForgotPassword();
     const { values, errors, touched, handleChange, handleBlur,  handleSubmit} = 
     useFormik({
         initialValues: {
           email: '',
-          password: '',
         },
-        validationSchema,
-        onSubmit: (values) => {
-          login(values);
+        // validationSchema,
+        onSubmit: ({ email }) => {
+            forgotPassword(email);
         },
       });
   return (
@@ -30,7 +27,7 @@ const Login = () => {
         <Card className="w-[450px]">
           <CardHeader>
             <CardTitle className="text-center text-3xl text-primary">
-              Login Event War
+              Forgot Password
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -49,27 +46,11 @@ const Login = () => {
                                   label={'Email'}                
                 />
                 {/* EMAIL END */}
-
-                {/* PASSWORD */}
-                <FormInput
-                                  name="password"
-                                  error={errors.password}
-                                  isError={!!touched.password && !!errors.password}
-                                  handleBlur={handleBlur}
-                                  handleChange={handleChange}
-                                  placeholder="Password"
-                                  type="password"
-                                  value={values.password} 
-                                  label={'Password'}                
-                />
-                {/* PASSWORD END */}
-                <p className="cursor-pointer text-end text-xs"
-                  onClick={() => router.push('/forgot-password')}
-                >
-                  Forgot Password?
-                </p>
               </div>
-              <Button className="mt-6 w-full bg-slate-800 text-white">Login</Button>
+            <Button className="mt-6 w-full bg-slate-800 text-white" disabled={isLoading}>
+                { isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" /> }
+                { isLoading ? 'Loading' : 'Submit' }
+            </Button>
             </form>
           </CardContent>
         </Card>
@@ -78,4 +59,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default ForgotPassword;
