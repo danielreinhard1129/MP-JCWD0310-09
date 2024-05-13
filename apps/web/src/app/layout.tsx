@@ -7,6 +7,7 @@ import { Contents } from '@/app/home/Content';
 import Footer from '@/app/footer/page';
 import TagLine from '@/app/home/TagLine';
 import Navbar from '@/components/Navbar';
+import StoreProvider from '@/providers/StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +24,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <StoreProvider>
+          <Navbar />
+          {children}
 
-        <Footer />
+          <Footer />
+        </StoreProvider>
       </body>
     </html>
   );

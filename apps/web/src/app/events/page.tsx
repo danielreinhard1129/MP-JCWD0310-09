@@ -40,8 +40,6 @@ const Events = () => {
   const [date, setDate] = React.useState<Date>();
   return (
     <>
-      <Navbar />
-
       <div className="bg-[url('/bg-events.jpg')] bg-cover w-full h-[300px] text-white">
         <div className="container mx-auto text-center grid grid-cols-5 justify-center h-full ">
           <div className="my-auto">

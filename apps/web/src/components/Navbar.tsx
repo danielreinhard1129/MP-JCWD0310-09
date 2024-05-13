@@ -2,16 +2,35 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const router = useRouter();
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+  const [navbar, setNavbar] = useState(true);
+
+  const changeBackground = () => {
+    // console.log(window.scrollY);
+    if (window.scrollY >= 279) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+  window.addEventListener('scroll', changeBackground);
   return (
     <>
-      <nav className=" text-whites bg-woodsmokey ">
+      <nav
+        className={
+          navbar
+            ? 'sticky top-0 z-50 bg-woodsmokey bg-opacity-90 backdrop-blur-sm text-white'
+            : 'sticky top-0 z-50 bg-woodsmokey text-white  '
+        }
+      >
         <div className="mx-auto px-4">
           <div className="flex items-center justify-between">
             <div className="h-24 w-56">
@@ -44,7 +63,10 @@ const Navbar = () => {
                 <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
                   <Link href={'/login'}>Log In</Link>
                 </Badge>
-                <Badge className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints" onClick={() => router.push('/register')}>
+                <Badge
+                  className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints cursor-pointer"
+                  onClick={() => router.push('/register')}
+                >
                   <h5>Register</h5>
                 </Badge>
               </div>
