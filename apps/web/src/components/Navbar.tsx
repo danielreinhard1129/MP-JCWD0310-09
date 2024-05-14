@@ -17,7 +17,6 @@ const Navbar = () => {
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(logoutAction());
-    router.push('/login')
   }
   
   const [navbar, setNavbar] = useState(true);
