@@ -27,6 +27,10 @@ export default function RootLayout({
         <StoreProvider>
           <Navbar />
           {children}
+<<<<<<< HEAD
+
+=======
+>>>>>>> develop
           <Footer />
         </StoreProvider>
       </body>
