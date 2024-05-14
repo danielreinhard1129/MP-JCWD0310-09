@@ -2,15 +2,21 @@
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { logoutAction } from '@/redux/slices/userSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { logoutAction } from '@/redux/slices/userSlice';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Badge } from './ui/badge';
+import { useEffect, useState } from 'react';
+import { Badge } from './ui/badge';
 
 const Navbar = () => {
   const router = useRouter();
+  const router = useRouter();
   const dispatch = useAppDispatch();
+
 
   const { id } = useAppSelector((state) => state.user);
 
