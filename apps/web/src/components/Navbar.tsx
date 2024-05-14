@@ -13,7 +13,7 @@ const Navbar = () => {
   const dispatch = useAppDispatch();
   const { id } = useAppSelector((state) => state.user);
   const router = useRouter();
-<<<<<<< HEAD
+
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [navbar, setNavbar] = useState(true);
@@ -27,13 +27,12 @@ const Navbar = () => {
     }
   };
   window.addEventListener('scroll', changeBackground);
-=======
 
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(logoutAction());
   }
->>>>>>> develop
+  
   return (
     <>
       <nav
