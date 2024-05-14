@@ -17,23 +17,30 @@ const Navbar = () => {
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(logoutAction());
+    router.push('/login')
   }
   
   const [navbar, setNavbar] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+
   const changeBackground = () => {
     if (window.scrollY >= 279) {
-      setNavbar(true);
-    } else {
       setNavbar(false);
+    } else {
+      setNavbar(true);
     }
+    setScrollY(window.scrollY);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', changeBackground);
-    return () => {
-      window.removeEventListener('scroll', changeBackground);
+    const handleScroll = () => {
+      changeBackground();
     };
-  }, []);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrollY]);
 
   return (
     <>
