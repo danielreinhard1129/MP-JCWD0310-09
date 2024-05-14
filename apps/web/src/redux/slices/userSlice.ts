@@ -1,35 +1,31 @@
-import { User } from "@/types/user.type";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
+import { User } from '@/types/user.type';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: User = {
     id: 0,
-    firstName: "",
-    lastName: "",
-    email: "",
-};
+    email: '',
+    firstName: '',
+    lastName: '',
+}
 
 export const userSlice = createSlice({
-    name: "user",
-    initialState,
-    reducers: {
-        //action untuk ngisi state 
-        loginAction: (state, action: PayloadAction<User>) => {
-            state.id = action.payload.id;
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-            state.email = action.payload.email;
-        },
-        //action untuk logout
-        logoutAction: (state) => {
-            state.id = 0;
-            state.firstName = "";
-            state.lastName = "";
-            state.email = "";
-        },
+  name: 'user',
+  initialState,
+  reducers: {
+    loginAction: (state, action: PayloadAction<User>) => {
+        state.id = action.payload.id;
+        state.email = action.payload.email;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
     },
+    logoutAction: (state) => {
+        state.id = 0;
+        state.email = '';
+        state.firstName = '';
+        state.lastName = '';
+    }
+  }
 });
-
 
 export const { loginAction, logoutAction } = userSlice.actions;
 export default userSlice.reducer;

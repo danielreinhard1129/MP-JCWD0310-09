@@ -1,38 +1,40 @@
 'use client';
 
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { logoutAction } from '@/redux/slices/userSlice';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { useRouter } from 'next/navigation';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { logoutAction } from '@/redux/slice/userSlice';
+import { useEffect, useState } from 'react';
+import { Badge } from './ui/badge';
 
 const Navbar = () => {
-  const dispatch = useAppDispatch();
-  const { id } = useAppSelector((state) => state.user);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
-  const [navbar, setNavbar] = useState(true);
-
-  const changeBackground = () => {
-    // console.log(window.scrollY);
-    if (window.scrollY >= 279) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-  window.addEventListener('scroll', changeBackground);
+  const { id } = useAppSelector((state) => state.user);
 
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(logoutAction());
   }
   
+  const [navbar, setNavbar] = useState(true);
+  const changeBackground = () => {
+    if (window.scrollY >= 279) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeBackground);
+    return () => {
+      window.removeEventListener('scroll', changeBackground);
+    };
+  }, []);
+
   return (
     <>
       <nav
