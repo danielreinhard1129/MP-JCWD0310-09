@@ -7,6 +7,10 @@ export const axiosInstance: AxiosInstance = axios.create({
   baseURL: baseUrl,
 });
 
+export const axiosWithoutToken: AxiosInstance = axios.create({
+  baseURL: baseUrl,
+});
+
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
