@@ -43,10 +43,10 @@ const Register: React.FC = () => {
                     name="firstName"
                     error={errors.firstName}
                     isError={!!touched.firstName && !!errors.firstName}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="First Name"
-                    type="name"
+                    type="text"
                     value={values.firstName}
                     label={'First Name'}
                   />
@@ -57,8 +57,8 @@ const Register: React.FC = () => {
                     name="lastName"
                     error={errors.lastName}
                     isError={!!touched.lastName && !!errors.lastName}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="Last Name"
                     type="name"
                     value={values.lastName}
@@ -71,8 +71,8 @@ const Register: React.FC = () => {
                     name="email"
                     error={errors.email}
                     isError={!!touched.email && !!errors.email}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="Email"
                     type="email"
                     value={values.email}
@@ -85,8 +85,8 @@ const Register: React.FC = () => {
                     name="password"
                     error={errors.password}
                     isError={!!touched.password && !!errors.password}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="Password"
                     type="password"
                     value={values.password}
@@ -99,8 +99,8 @@ const Register: React.FC = () => {
                     name="referralCode"
                     error={errors.referralCode}
                     isError={!!touched.referralCode && !!errors.referralCode}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
                     placeholder="Referral Code"
                     type="text"
                     value={values.referralCode}

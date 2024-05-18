@@ -2,7 +2,7 @@
 
 import Dropzone from '@/components/Dropzone';
 import FormInput from '@/components/FormInput';
-import FormTextArea from '@/components/FormTextArea';
+
 import PreviewImages from '@/components/PreviewImages';
 import RichTextEditor from '@/components/RichTextEditor';
 import { Button } from '@/components/ui/button';
@@ -10,10 +10,12 @@ import useCreateEvent from '@/hooks/api/event/useCreateEvent';
 import { useAppSelector } from '@/redux/hooks';
 import { IFormCreateEvent } from '@/types/event.type';
 import { useFormik } from 'formik';
+import Image from 'next/image';
 import React from 'react';
+import { validationSchema } from './validationSchema';
 
 const CreateEvent = () => {
-  const { createBlog } = useCreateEvent();
+  const { createEvent } = useCreateEvent();
   const { id } = useAppSelector((state) => state.user);
   const {
     handleSubmit,
@@ -26,132 +28,185 @@ const CreateEvent = () => {
   } = useFormik<IFormCreateEvent>({
     initialValues: {
       title: '',
-      category: '',
       thumbnail: [],
       description: '',
-      content: '',
+      remainingTicket: '',
       location: '',
       price: '',
       startDate: '',
       endDate: '',
+      // phone: '',
+      // categoryName: '',
+      category: '',
     },
+    // validationSchema: validationSchema,
     onSubmit: (values) => {
-      createBlog({ ...values, userId: id });
+      createEvent({ ...values, userId: id });
     },
   });
-  console.log(values.content);
+  console.log(values);
 
   return (
-    <div className="container mx-auto px-4">
-      <form onSubmit={handleSubmit}>
-        <div className="mx-auto flex max-w-5xl flex-col gap-4">
-          <FormInput
-            name="title"
-            error={errors.title}
-            isError={!!touched.title && !!errors.title}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Title"
-            type="title"
-            value={values.title}
-            label="Title"
-          />
-          <FormInput
-            name="category"
-            error={errors.category}
-            isError={!!touched.category && !!errors.category}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Category"
-            type="text"
-            value={values.category}
-            label="Category"
-          />
-          <FormInput
-            name="location"
-            error={errors.location}
-            isError={!!touched.location && !!errors.location}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Location"
-            type="text"
-            value={values.location}
-            label="Location"
-          />
-          <FormInput
-            name="price"
-            error={errors.price}
-            isError={!!touched.price && !!errors.price}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Price"
-            type="text"
-            value={values.price}
-            label="Price"
-          />
-          <FormInput
-            name="startDate"
-            error={errors.startDate}
-            isError={!!touched.startDate && !!errors.startDate}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Start Date"
-            type="text"
-            value={values.startDate}
-            label="Start Date"
-          />
-          <FormInput
-            name="endDate"
-            error={errors.endDate}
-            isError={!!touched.endDate && !!errors.endDate}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="End date"
-            type="text"
-            value={values.endDate}
-            label="End Date"
-          />
-          <FormTextArea
-            name="description"
-            error={errors.description}
-            isError={!!touched.description && !!errors.description}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            placeholder="Description"
-            value={values.description}
-            label="Description"
-          />
+    <>
+      <div className="bg-[url('/bg.jpg')] w-full h-[screen] bg-cover mx-auto mr-5 relative text-whites">
+        <h3 className="text-3xl text-center font-bold pt-3">
+          Create Your Event
+        </h3>
+        <form onSubmit={handleSubmit} className="mx-auto flex justify-center">
+          <div className="mx-5 px-2 max-w-5xl gap-4 border border-gray-700 my-2 py-5 rounded-md ">
+            <div className="container grid grid-cols-2 justify-evenly gap-4">
+              <div className="space-y-5">
+                <FormInput
+                  name="title"
+                  error={errors.title}
+                  isError={!!touched.title && !!errors.title}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Title"
+                  type="text"
+                  value={values.title}
+                  label={'Title'}
+                />
+                <FormInput
+                  name="category"
+                  error={errors.category}
+                  isError={!!touched.category && !!errors.category}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Category"
+                  type="text"
+                  value={values.category}
+                  label="Category"
+                />
+                <FormInput
+                  name="location"
+                  error={errors.location}
+                  isError={!!touched.location && !!errors.location}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Location"
+                  type="text"
+                  value={values.location}
+                  label="Location"
+                />
+                {/* <div className="flex justify-start status">
+                <div className="flex mr-5">
+                  <p className="my-auto mr-1">Free</p>
+                  <FormInput
+                    name="isFree"
+                    error={errors.isFree}
+                    isError={!!touched.isFree && !!errors.isFree}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Status"
+                    value={values.isFree}
+                    label=""
+                    type="radio"
+                  />
+                </div>
+                <div className="flex">
+                  <p className="my-auto mr-1">Paid</p>
+                  <FormInput
+                    name="isFree"
+                    error={errors.isFree}
+                    isError={!!touched.isFree && !!errors.isFree}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    placeholder="Status"
+                    value={values.isFree}
+                    label=""
+                    type="radio"
+                  />
+                </div>
+              </div> */}
 
-          <PreviewImages
-            fileImages={values.thumbnail}
-            onRemoveImage={(idx: number) =>
-              setFieldValue('thumbnail', values.thumbnail.toSpliced(idx, 1))
-            }
-          />
+                <FormInput
+                  name="price"
+                  error={errors.price}
+                  isError={!!touched.price && !!errors.price}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Price (Input 0 if your event is free)"
+                  type="number"
+                  value={values.price}
+                  label="Price "
+                />
+              </div>
+              <div className="space-y-5">
+                <FormInput
+                  name="startDate"
+                  error={errors.startDate}
+                  isError={!!touched.startDate && !!errors.startDate}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Start Event"
+                  type="datetime-local"
+                  value={values.startDate}
+                  label="Start Event"
+                />
+                <FormInput
+                  name="endDate"
+                  error={errors.endDate}
+                  isError={!!touched.endDate && !!errors.endDate}
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="End Event"
+                  type="datetime-local"
+                  value={values.endDate}
+                  label="End Event"
+                />
+                <FormInput
+                  name="remainingTicket"
+                  error={errors.remainingTicket}
+                  isError={
+                    !!touched.remainingTicket && !!errors.remainingTicket
+                  }
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  placeholder="Ticket Limit"
+                  value={values.remainingTicket}
+                  label="Ticket Limit"
+                  type="number"
+                />
+              </div>
+            </div>
 
-          <Dropzone
-            isError={Boolean(errors.thumbnail)}
-            label="Thumbnail"
-            onDrop={(files) =>
-              setFieldValue('thumbnail', [
-                ...values.thumbnail,
-                ...files.map((file) => file),
-              ])
-            }
-          />
-          <RichTextEditor
-            onChange={(html: string) => setFieldValue('content', html)}
-            label="Content"
-            value={values.content}
-            isError={Boolean(errors.content)}
-          />
-        </div>
-
-        <div className="mb-4 flex justify-end">
-          <Button type="submit">Submit</Button>
-        </div>
-      </form>
-    </div>
+            <PreviewImages
+              fileImages={values.thumbnail}
+              onRemoveImage={(idx: number) =>
+                setFieldValue('thumbnail', values.thumbnail.toSpliced(idx, 1))
+              }
+            />
+            <div>
+              <Dropzone
+                isError={Boolean(errors.thumbnail)}
+                label="Picture"
+                onDrop={(files) =>
+                  setFieldValue('thumbnail', [
+                    ...values.thumbnail,
+                    ...files.map((file) => file),
+                  ])
+                }
+              />
+              <RichTextEditor
+                onChange={(html: string) => setFieldValue('description', html)}
+                label="Description"
+                value={values.description}
+                isError={Boolean(errors.description)}
+              />
+              <div className="mb-4 flex justify-end">
+                <Button
+                  type="submit"
+                  className="bg-brown-shades rounded-sm p-2 hover:bg-brown-tints"
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

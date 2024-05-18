@@ -1,20 +1,17 @@
 'use client';
 
 import { axiosInstance } from '@/lib/axios';
-import { IFormCreateEvent } from '@/types/event.type';
+import { Event, IFormCreateEvent } from '@/types/event.type';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { FileWithPath } from 'react-dropzone';
 
 const useCreateEvent = () => {
   const router = useRouter();
-  const createBlog = async (payload: IFormCreateEvent) => {
+  const createEvent = async (payload: IFormCreateEvent) => {
     try {
       const {
         title,
-        category,
-        content,
         startDate,
         endDate,
         description,
@@ -22,18 +19,24 @@ const useCreateEvent = () => {
         price,
         thumbnail,
         userId,
+        remainingTicket,
+        // categoryName,
+        category,
       } = payload;
       const createEventForm = new FormData();
 
       createEventForm.append('title', title);
-      createEventForm.append('category', category);
-      createEventForm.append('content', content);
       createEventForm.append('startDate', startDate);
       createEventForm.append('endDate', endDate);
       createEventForm.append('description', description);
       createEventForm.append('location', location);
       createEventForm.append('price', price);
       createEventForm.append('userId', String(userId));
+      createEventForm.append('remainingTicket', String(remainingTicket));
+      // createEventForm.append('categoryName', categoryName);
+      createEventForm.append('category', category);
+
+      // createEventForm.append('phone', phone);
 
       thumbnail.forEach((file: FileWithPath) => {
         createEventForm.append('thumbnail', file);
@@ -48,7 +51,7 @@ const useCreateEvent = () => {
       }
     }
   };
-  return { createBlog };
+  return { createEvent };
 };
 
 export default useCreateEvent;
