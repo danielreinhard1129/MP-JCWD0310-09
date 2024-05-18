@@ -29,14 +29,7 @@ export const createEventService = async (body: CreateEvent, file: Express.Multer
             throw new Error(`User not found`);
         }
 
-        // const eventCategory = await prisma.eventCategory.findFirst({
-        //     where: {
-        //         categoryName: String()
-        //     }
-        // })
-        // if (!eventCategory) {
-        //     throw new Error(`Event category not found`);
-        // }
+
 
         return await prisma.event.create({
             data: {

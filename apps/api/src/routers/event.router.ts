@@ -16,6 +16,7 @@ export class EventRouter {
 
     private initializeRoutes(): void {
         this.router.post('/', verifyToken, uploader("IMG", "/images").array("thumbnail", 1), this.eventController.createEventController);
+        this.router.get('/', this.eventController.getEventsController);
         this.router.get('/:id', this.eventController.getEventController);
 
     }
