@@ -9,6 +9,7 @@ import React from 'react';
 import { validationSchema } from './validationSchema';
 import useLogin from '@/hooks/api/auth/useLogin';
 import { useRouter } from 'next/navigation';
+import AuthGuardUser from '@/hoc/CustomerGuard';
 
 const Login = () => {
   const router = useRouter();
@@ -21,7 +22,12 @@ const Login = () => {
       },
       validationSchema,
       onSubmit: (values) => {
-        login(values);
+        try {
+          login(values);
+        } catch (error) {
+          console.log(error);
+          
+        }
       },
     });
   return (
@@ -65,7 +71,7 @@ const Login = () => {
                 {/* PASSWORD END */}
                 <p
                   className="cursor-pointer text-end text-xs"
-                  onClick={() => router.push('/forgot-password')}
+                  onClick={() => router.push('/')}
                 >
                   Forgot Password?
                 </p>

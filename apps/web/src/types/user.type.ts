@@ -1,4 +1,4 @@
-import { Gender, Role } from "./enum.type";
+import { Gender } from "./enum.type";
 import { Point } from "./point.type";
 import { Reward } from "./reward.type";
 
@@ -7,8 +7,9 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
+    role?: string;
     password?: string;
-    referralCode?: string;
+    referralCode?: string
     userDetail?: UserDetail;
     point?: Point;
     reward?: Reward;
@@ -20,7 +21,6 @@ export interface UserDetail {
     birthDate?: Date;
     gender?: Gender;
     phone?: string;
-    role: Role;
     isVerified: boolean;
     createdAt: Date;
     updatedAt: Date;

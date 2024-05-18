@@ -109,16 +109,18 @@ const Register: React.FC = () => {
                     label={'Referral Code'}
                   />
                   {/* REFERRAL END */}
-                  <p
-                  className="cursor-pointer text-end text-xs"
-                  onClick={() => router.push('/register-organizer')}
+                </div>
+                <Button className="mt-6 w-full bg-slate-800 text-white"
+                onClick={() => router.push('/login')}
+                >
+                  Register
+                </Button>
+                <p
+                  className="cursor-pointer text-end text-xs mt-4"
+                  onClick={() => router.push('/organizer/register')}
                 >
                   Register as Organizer
                 </p>
-                </div>
-                <Button className="mt-6 w-full bg-slate-800 text-white">
-                  Register
-                </Button>
               </form>
             </CardContent>
           </Card>
