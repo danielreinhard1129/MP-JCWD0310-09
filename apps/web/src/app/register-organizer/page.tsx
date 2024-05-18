@@ -5,13 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useFormik } from 'formik';
 import React from 'react';
 import { validationSchema } from './validationSchema';
-import useRegister from '@/hooks/api/auth/useRegister';
 import Navbar from '@/components/Navbar';
-import { useRouter } from 'next/navigation';
+import useRegisterOrganizer from '@/hooks/api/auth/useRegisterOrganizer';
 
-const Register: React.FC = () => {
-  const router = useRouter();
-  const { register } = useRegister();
+const RegisterOrganizer: React.FC = () => {
+  const { registerOrganizer } = useRegisterOrganizer();
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
@@ -19,11 +17,10 @@ const Register: React.FC = () => {
         lastName: '',
         email: '',
         password: '',
-        referralCode: '',
       },
       validationSchema,
       onSubmit: (values) => {
-        register(values);
+        registerOrganizer(values);
       },
     });
 
@@ -95,29 +92,9 @@ const Register: React.FC = () => {
                     label={'Password'}
                   />
                   {/* PASSWORD END */}
-
-                  {/* REFERRAL */}
-                  <FormInput
-                    name="referralCode"
-                    error={errors.referralCode}
-                    isError={!!touched.referralCode && !!errors.referralCode}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Referral Code"
-                    type="text"
-                    value={values.referralCode}
-                    label={'Referral Code'}
-                  />
-                  {/* REFERRAL END */}
-                  <p
-                  className="cursor-pointer text-end text-xs"
-                  onClick={() => router.push('/register-organizer')}
-                >
-                  Register as Organizer
-                </p>
                 </div>
                 <Button className="mt-6 w-full bg-slate-800 text-white">
-                  Register
+                  Organizer Register
                 </Button>
               </form>
             </CardContent>
@@ -128,4 +105,4 @@ const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export default RegisterOrganizer;

@@ -30,7 +30,7 @@ const useCreateEvent = () => {
       createEventForm.append('endDate', endDate);
       createEventForm.append('description', description);
       createEventForm.append('location', location);
-      createEventForm.append('price', price);
+      createEventForm.append('price', String(price));
       createEventForm.append('userId', String(userId));
       createEventForm.append('remainingTicket', String(remainingTicket));
       // createEventForm.append('categoryName', categoryName);

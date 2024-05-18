@@ -20,23 +20,13 @@ model Sample {
   @@map("samples") // if you want to use snake_case format
 }
 
-enum Gender {
-  male
-  female
-}
-
-enum Role {
-  customer
-  event_organizer
-}
-
 model User {
   id           Int     @id @default(autoincrement())
-  fullName     String?
   firstName    String
   lastName     String
   email        String  @unique
   password     String
+  role         Role
   referralCode String  @unique
 
   userDetail UserDetail? @relation()
@@ -47,15 +37,20 @@ model User {
   @@map("users")
 }
 
+enum Role {
+  CUSTOMER
+  ORGANIZER
+}
+
 model UserDetail {
   id         Int       @id @default(autoincrement())
   birthDate  DateTime?
   gender     Gender?
   phone      String?
-  role       Role      @default(customer)
-  isVerified Boolean
+  isVerified Boolean   @default(false)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 
   userId Int   @unique
   user   User? @relation(fields: [userId], references: [id])
@@ -63,9 +58,14 @@ model UserDetail {
   @@map("user_details")
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
 model Point {
   id          Int       @id @default(autoincrement())
-  totalPoint  BigInt
+  totalPoint  Int
   earnDate    DateTime?
   expiredDate DateTime?
 
