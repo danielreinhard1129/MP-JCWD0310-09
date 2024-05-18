@@ -12,15 +12,16 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-
   const { id } = useAppSelector((state) => state.user);
+
+
 
   const logout = () => {
     localStorage.removeItem('token');
     dispatch(logoutAction());
-    router.push('/login')
-  }
-  
+    router.push('/login');
+  };
+
   const [navbar, setNavbar] = useState(true);
   const [scrollY, setScrollY] = useState(0);
 
@@ -68,59 +69,61 @@ const Navbar = () => {
             </div>
 
             {Boolean(id) ? (
-            <div className="flex items-center gap-8 ml-5">
-              <Link href={'/events'}>
-                <h3 className="events">Events</h3>
-              </Link>
-              <Link href={'/venues'}>
-                <h3 className="venue">Venues</h3>
-              </Link>
-              <Link href={'/about'}>
-                <h3 className="about">About</h3>
-              </Link>
-              <Link href={'/contact'}>
-                <h3 className="contact">Contact</h3>
-              </Link>
-              <div>
-                <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
-                  onClick={logout}
-                >
-                  <Link href={'/login'}>Logout</Link>
-                </Badge>
-                <Badge className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints" 
-                  onClick={() => router.push('/register')}>
-                  <h5>Register</h5>
-                </Badge>
+              <div className="flex items-center gap-8 ml-5">
+                <Link href={'/events'}>
+                  <h3 className="events">Events</h3>
+                </Link>
+                <Link href={'/venues'}>
+                  <h3 className="venue">Venues</h3>
+                </Link>
+                <Link href={'/about'}>
+                  <h3 className="about">About</h3>
+                </Link>
+                <Link href={'/contact'}>
+                  <h3 className="contact">Contact</h3>
+                </Link>
+                <div>
+                  <Badge
+                    className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
+                    onClick={logout}
+                  >
+                    <Link href={'/login'}>Logout</Link>
+                  </Badge>
+                  <Badge
+                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints"
+                    onClick={() => router.push('/create-event')}
+                  >
+                    <h5>Create Event</h5>
+                  </Badge>
+                </div>
               </div>
-            </div>
             ) : (
               <div className="flex items-center gap-8 ml-5">
-              <Link href={'/events'}>
-                <h3 className="events">Events</h3>
-              </Link>
-              <Link href={'/venues'}>
-                <h3 className="venue">Venues</h3>
-              </Link>
-              <Link href={'/about'}>
-                <h3 className="about">About</h3>
-              </Link>
-              <Link href={'/contact'}>
-                <h3 className="contact">Contact</h3>
-              </Link>
-              <div>
-                <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
-                  <Link href={'/login'}>Log In</Link>
-                </Badge>
-                <Badge
-                  className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints cursor-pointer"
-                  onClick={() => router.push('/register')}
-                >
-                  <h5>Register</h5>
-                </Badge>
+                <Link href={'/events'}>
+                  <h3 className="events">Events</h3>
+                </Link>
+                <Link href={'/venues'}>
+                  <h3 className="venue">Venues</h3>
+                </Link>
+                <Link href={'/about'}>
+                  <h3 className="about">About</h3>
+                </Link>
+                <Link href={'/contact'}>
+                  <h3 className="contact">Contact</h3>
+                </Link>
+                <div>
+                  <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
+                    <Link href={'/login'}>Log In</Link>
+                  </Badge>
+                  <Badge
+                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints cursor-pointer"
+                    onClick={() => router.push('/register')}
+                  >
+                    <h5>Register</h5>
+                  </Badge>
+                </div>
               </div>
-            </div>
             )}
-            
           </div>
         </div>
       </nav>

@@ -1,38 +1,46 @@
 import { User } from "./user.type"
 
+
+
 export interface Event {
-    id: number
-    title: string
-    startDate: string
-    endDate: string
-    location: string
+    id: number;
+    title: string;
+    price: number;
+    location: string;
+    description: string;
+    remainingTicket: number;
     booked: number
-    isFree: boolean
-    thumbnail: string
+    isFree: boolean;
+    startDate: Date;
+    endDate: Date;
+    thumbnail: string;
     category: string
-    content: string
-    description: string
-    price: string
+    deletedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: number;
+    user: User[]
+    // categories: { categoryName: string }
 
-    userId?: number
-    createdAt: Date
-    updatedAt: Date
-    deletedAt: Date | null
-
-    user: User
 
 }
 
-export interface IFormCreateEvent {
 
+export interface IFormCreateEvent {
     title: string
-    category: string
-    content: string
-    description: string
-    thumbnail: File[]
-    userId?: number
-    location: string
     startDate: string
     endDate: string
+    location: string
+    thumbnail: File[]
+    description: string
     price: string
+    remainingTicket: string
+    userId?: number
+    // eventId?: number
+    // categoryName: string
+    // phone: string
+    category: string
+
+
+
 }

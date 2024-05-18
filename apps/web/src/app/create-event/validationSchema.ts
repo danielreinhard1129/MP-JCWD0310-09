@@ -5,10 +5,10 @@ export const validationSchema = Yup.object().shape({
     category: Yup.string().required('Category is required'),
     location: Yup.string().required('Location is required'),
     price: Yup.string().required('Location is required'),
-    startDate: Yup.string().required('Start date is required'),
-    endDate: Yup.string().required('End date is required'),
+    startDate: Yup.string().required('Start Event is required'),
+    endDate: Yup.string().required('End Event is required'),
     description: Yup.string().required('Description is required'),
     thumbnail: Yup.array().min(1),
-    content: Yup.string().required('Content is required'),
+    availableTicket: Yup.string().required('input amount ticket'),
 
 })

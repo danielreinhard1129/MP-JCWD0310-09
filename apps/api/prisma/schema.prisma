@@ -31,17 +31,18 @@ enum Role {
 }
 
 model User {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
+  fullName     String?
   firstName    String
   lastName     String
-  email        String @unique
+  email        String  @unique
   password     String
-  referralCode String @unique
+  referralCode String  @unique
 
   userDetail UserDetail? @relation()
   point      Point?      @relation()
   reward     Reward?     @relation()
-  event      Event?      @relation()
+  Event      Event[]
 
   @@map("users")
 }
@@ -86,33 +87,24 @@ model Reward {
 }
 
 model Event {
-  id          Int       @id @default(autoincrement())
-  title       String
-  startDate   DateTime
-  endDate     DateTime
-  location    String
-  booked      Int
-  isFree      Boolean
-  thumbnail   String
-  description String
-  price       String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  id              Int      @id @default(autoincrement())
+  title           String   @unique
+  price           Int
+  location        String
+  description     String   @db.LongText()
+  remainingTicket Int
+  booked          Int?
+  isFree          Boolean?
+  startDate       DateTime
+  endDate         DateTime
+  category        String
 
-  userId          Int            @unique
-  user            User?          @relation(fields: [userId], references: [id])
-  eventCategoryId Int            @unique
-  eventCategory   EventCategory? @relation(fields: [eventCategoryId], references: [id])
+  thumbnail String
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
 
   @@map("events")
-}
-
-model EventCategory {
-  id           Int    @id @default(autoincrement())
-  categoryName String
-
-  event Event? @relation()
-
-  @@map("eventcategories")
 }

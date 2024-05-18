@@ -2,7 +2,7 @@
 import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Card, CardContent } from '@/components/ui/card';
+
 import {
   Carousel,
   CarouselContent,
@@ -35,9 +35,17 @@ import { LuMapPin } from 'react-icons/lu';
 import { MdOutlinePendingActions } from 'react-icons/md';
 import { FaMoneyCheckAlt } from 'react-icons/fa';
 import Cards from './Cards';
+import useGetEvent from '@/hooks/api/event/useGetEvent';
+import { notFound } from 'next/navigation';
 
-const Events = () => {
+const Events = ({ params }: { params: { id: string } }) => {
   const [date, setDate] = React.useState<Date>();
+  const { event } = useGetEvent(Number(params.id));
+
+  // if (!event) {
+  //   return notFound();
+  // }
+
   return (
     <>
       <div className="bg-[url('/bg-events.jpg')] bg-cover w-full h-[300px] text-white">
@@ -177,12 +185,22 @@ const Events = () => {
       </div>
 
       <div className="container grid grid-cols-3 mb-10 gap-5">
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
+        {/* {event.map((event, index) => {
+          return (
+            <Cards
+              key={index}
+              title={event}
+              availableTicket={event}
+              category={event}
+              description={event}
+              endDate={event}
+              location={event}
+              price={event}
+              startDate={event}
+              thumbnail={event}
+            />
+          );
+        })} */}
       </div>
     </>
   );
