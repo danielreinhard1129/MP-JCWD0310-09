@@ -119,7 +119,7 @@ const EventDetail = ({ params }: { params: { id: string } }) => {
           <div className="flex">
             <Ticket color="grey" size={20} />
             <p className="text-xs font-light my-auto ml-1">
-              {event.availableTicket}
+              {event.remainingTicket}
             </p>
           </div>
           <div className="w-full mx-auto text-center font-medium">
