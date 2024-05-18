@@ -50,6 +50,7 @@ export const createEventService = async (body: CreateEvent, file: Express.Multer
                 description: String(description),
                 location: String(location),
                 price: Number(price), userId: Number(userId)
+                
                 // , EventCategory: {
                 //     create: {
                 //         categoryName: eventCategory.categoryName

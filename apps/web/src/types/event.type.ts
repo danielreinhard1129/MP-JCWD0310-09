@@ -36,6 +36,7 @@ export interface IFormCreateEvent {
     price: string
     remainingTicket: string
     userId?: number
+    
     // eventId?: number
     // categoryName: string
     // phone: string
