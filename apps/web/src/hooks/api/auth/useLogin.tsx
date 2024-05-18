@@ -26,7 +26,6 @@ const useLogin = () => {
                 "/auth/login", 
                 payload,
             );
-            
             dispatch(loginAction(data.data));
             localStorage.setItem('token', data.token);
             router.replace('/');

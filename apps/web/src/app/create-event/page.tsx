@@ -13,6 +13,8 @@ import { useFormik } from 'formik';
 import Image from 'next/image';
 import React from 'react';
 import { validationSchema } from './validationSchema';
+import AuthGuardOrganizer from '@/hoc/OrganizerGuard';
+import AuthGuardUser from '@/hoc/CustomerGuard';
 
 const CreateEvent = () => {
   const { createEvent } = useCreateEvent();
@@ -210,4 +212,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default AuthGuardOrganizer(CreateEvent);

@@ -4,7 +4,7 @@ import { sign } from "jsonwebtoken";
 import { comparePassword } from "@/lib/bcrypt";
 import { JWT_SECRET } from "@/config";
 
-export const loginService = async (body: Pick<User, "email" | "password">) => {
+export const loginService = async (body: Pick<User, "email" | "password" | "role">) => {
     try {
         const { email, password } = body;
         const user = await prisma.user.findFirst({

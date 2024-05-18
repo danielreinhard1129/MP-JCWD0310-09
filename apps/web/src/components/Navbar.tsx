@@ -12,9 +12,7 @@ const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { id } = useAppSelector((state) => state.user);
-
-
+  const { id, role } = useAppSelector((state) => state.user);
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -68,7 +66,7 @@ const Navbar = () => {
               </Link>
             </div>
 
-            {Boolean(id) ? (
+            { Boolean(id) ? (
               <div className="flex items-center gap-8 ml-5">
                 <Link href={'/events'}>
                   <h3 className="events">Events</h3>
@@ -82,20 +80,31 @@ const Navbar = () => {
                 <Link href={'/contact'}>
                   <h3 className="contact">Contact</h3>
                 </Link>
-                <div>
-                  <Badge
-                    className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
-                    onClick={logout}
-                  >
-                    <Link href={'/login'}>Logout</Link>
-                  </Badge>
-                  <Badge
-                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints"
-                    onClick={() => router.push('/create-event')}
-                  >
-                    <h5>Create Event</h5>
-                  </Badge>
-                </div>
+                { role === "ORGANIZER" ? (
+                  <div>
+                    <Badge
+                      className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
+                      onClick={logout}
+                    >
+                      <Link href={'/login'}>Logout</Link>
+                    </Badge>
+                    <Badge
+                      className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints"
+                      onClick={() => router.push('/create-event')}
+                    >
+                      <h5>Create Event</h5>
+                    </Badge>
+                  </div>
+                ) : (
+                  <div>
+                    <Badge
+                      className="bg-brown-shades rounded-full p-2 hover:bg-brown-tints"
+                      onClick={logout}
+                    >
+                      <Link href={'/login'}>Logout</Link>
+                    </Badge>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="flex items-center gap-8 ml-5">
