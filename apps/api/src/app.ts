@@ -41,7 +41,6 @@ export default class App {
       }
     });
 
-    // error
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         if (req.path.includes('/api/')) {
@@ -55,7 +54,6 @@ export default class App {
   }
 
   private routes(): void {
-    // const sampleRouter = new SampleRouter();
     const authRouter = new AuthRouter();
     const eventRouter = new EventRouter();
     const userRouter = new UserRouter();
@@ -64,7 +62,6 @@ export default class App {
       res.send(`Hello, Purwadhika Student !`);
     });
 
-    // this.app.use('/api/samples', sampleRouter.getRouter());
     this.app.use('/api/auth/', authRouter.getRouter());
     this.app.use('/api/events/', eventRouter.getRouter());
     this.app.use('/api/user/', userRouter.getRouter());

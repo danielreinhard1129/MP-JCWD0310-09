@@ -9,7 +9,7 @@ export interface Event {
     location: string;
     description: string;
     remainingTicket: number;
-    booked: number
+    booked: number;
     isFree: boolean;
     startDate: Date;
     endDate: Date;
@@ -20,28 +20,18 @@ export interface Event {
     updatedAt: Date;
     userId: number;
     user: User[]
-    // categories: { categoryName: string }
-
-
 }
 
 
 export interface IFormCreateEvent {
-    title: string
-    startDate: string
-    endDate: string
-    location: string
+    title: string;
+    startDate: string;
+    endDate: string;
+    location: string;
     thumbnail: File[]
-    description: string
-    price: string
-    remainingTicket: string
-    userId?: number
-    
-    // eventId?: number
-    // categoryName: string
-    // phone: string
-    category: string
-
-
-
+    description: string;
+    price: string;
+    remainingTicket: string;
+    userId?: number;
+    category: string;
 }

@@ -6,9 +6,7 @@ import { MdOutlinePendingActions } from 'react-icons/md';
 import { FaMoneyCheckAlt } from 'react-icons/fa';
 import { CalendarIcon } from '@radix-ui/react-icons';
 import { Badge } from '@/components/ui/badge';
-import useGetEvent from '@/hooks/api/event/useGetEvent';
 import { format } from 'date-fns';
-import { Currency } from 'lucide-react';
 
 interface CardsProps {
   title: string;

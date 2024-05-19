@@ -2,7 +2,6 @@ import useGetEvent from '@/hooks/api/event/useGetEvent';
 import React from 'react';
 
 const Header = () => {
-  // const { event } = useGetEvent(Number(params.id));
   return (
     <>
       <main className="mx-auto">

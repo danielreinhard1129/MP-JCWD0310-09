@@ -1,44 +1,42 @@
-"use client";
+'use client';
 
-import { useAppSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from '@/redux/hooks';
+import { redirect } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 export default function AuthGuardOrganizer(Component: any) {
   return function IsAuth(props: any) {
     const [isLoading, setIsLoading] = useState(true);
 
-    const { id, role } = useSelector((state: RootState) => state.user);
+    const { role } = useAppSelector((state) => state.user);
 
     useEffect(() => {
       setTimeout(() => {
         setIsLoading(false);
       }, 500);
-    }, []);
+    });
 
     useEffect(() => {
-      if (!id && !isLoading) {
-        redirect("/admin/login");
+      if (!role && !isLoading) {
+        redirect('/login');
       }
-    }, [id, isLoading]);
+    }),
+      [role, isLoading];
 
     useEffect(() => {
       if (role === "CUSTOMER" && !isLoading) {
-        alert("Please sign up or sign in as an organizer");
-        redirect("/admin/login");
+        redirect('/register-organizer');
       }
-    }, [role, isLoading]);
+    }),
+      [role, isLoading];
 
-    if (isLoading || !id) {
+    if (isLoading || !role) {
       return (
-        <h1 className="container flex h-screen justify-center px-4 pt-24 text-4xl font-extrabold">
+        <h1 className="container flex h-screen justify-center px-4 text-4xl pt-24 font-extrabold">
           Loading...
         </h1>
       );
     }
-
-    return <Component {...props} />;
+    return <Component {...props}/>
   };
 }

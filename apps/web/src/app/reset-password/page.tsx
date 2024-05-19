@@ -47,8 +47,8 @@ const ResetPassword = () => {
                                   name="password"
                                   error={errors.password}
                                   isError={!!touched.password && !!errors.password}
-                                  handleBlur={handleBlur}
-                                  handleChange={handleChange}
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
                                   placeholder="Password"
                                   type="password"
                                   value={values.password} 
@@ -61,8 +61,8 @@ const ResetPassword = () => {
                                   name="confirmPassword"
                                   error={errors.confirmPassword}
                                   isError={!!touched.confirmPassword && !!errors.confirmPassword}
-                                  handleBlur={handleBlur}
-                                  handleChange={handleChange}
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
                                   placeholder="Confirm Password"
                                   type="password"
                                   value={values.confirmPassword} 

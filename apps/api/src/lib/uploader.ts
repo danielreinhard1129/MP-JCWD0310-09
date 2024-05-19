@@ -8,7 +8,7 @@ type FilenameCallback = (error: Error | null, filename: string) => void;
 export const uploader = (
     filePreFix: string,
     foldername?: string,
-    filelimit?: number, //optional
+    filelimit?: number,
 ) => {
     const defaultDir = join(__dirname, '../../public');
 
@@ -50,7 +50,7 @@ export const uploader = (
         }
     };
 
-    const limits = { fileSize: filelimit || 2 * 1024 * 1024 }; // default 2mb
+    const limits = { fileSize: filelimit || 2 * 1024 * 1024 };
 
     return multer({ storage, fileFilter, limits });
 };

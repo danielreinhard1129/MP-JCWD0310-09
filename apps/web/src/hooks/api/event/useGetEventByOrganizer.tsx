@@ -5,17 +5,17 @@ import { Event } from '@/types/event.type';
 import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
-const useGetEvent = (id: number) => {
-  const [data, setData] = useState<Event | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+const useGetEventsByOrganizer = (id: number) => {
+  const [data, setData] = useState<Event[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getEvent = async () => {
+  const getEvents = async () => {
     try {
-      const { data } = await axiosInstance.get<Event>(`/events/${id}`);
+      const { data } = await axiosInstance.get(`/events/organizer?id=${id}`);
+
       setData(data);
     } catch (error) {
       if (error instanceof AxiosError) {
-        //TODO : replace console.log with toast
         console.log(error);
       }
     } finally {
@@ -24,10 +24,10 @@ const useGetEvent = (id: number) => {
   };
 
   useEffect(() => {
-    getEvent();
+    getEvents();
   }, []);
 
-  return { event: data, isLoading, refetch: getEvent };
+  return { data, isLoading, refetch: getEvents };
 };
 
-export default useGetEvent;
+export default useGetEventsByOrganizer;

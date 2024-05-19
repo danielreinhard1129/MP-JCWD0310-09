@@ -2,10 +2,8 @@
 
 import EventCard from '@/components/EventCard';
 import Pagination from '@/components/pagination';
-
 import useGetEvents from '@/hooks/api/event/useGetEvents';
 import { appConfig } from '@/utils/config';
-
 import React, { useState } from 'react';
 
 export default function NewestEvents() {

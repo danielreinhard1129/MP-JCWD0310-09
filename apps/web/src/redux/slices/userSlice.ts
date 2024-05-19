@@ -6,6 +6,7 @@ const initialState: User = {
   email: '',
   firstName: '',
   lastName: '',
+  role: '',
 }
 
 export const userSlice = createSlice({
@@ -17,12 +18,15 @@ export const userSlice = createSlice({
       state.email = action.payload.email;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
+      state.role = action.payload.role;
+
     },
     logoutAction: (state) => {
       state.id = 0;
       state.email = '';
       state.firstName = '';
       state.lastName = '';
+      state.role = '';
     }
   }
 });

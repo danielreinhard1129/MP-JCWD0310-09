@@ -1,8 +1,6 @@
 import prisma from "@/prisma"
-import { Event, User, UserDetail } from "@prisma/client"
+import { Event } from "@prisma/client"
 
-
-// Interface CreateEvent sesuai dengan model Event di Prisma
 interface CreateEvent extends Omit<Event, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt' | 'thumbnail' | 'isfree' | 'user'> { }
 
 
@@ -10,7 +8,6 @@ export const createEventService = async (body: CreateEvent, file: Express.Multer
     try {
         const { title, userId, startDate, endDate, remainingTicket, description, location, price, booked, isFree, category } = body;
 
-        // Cek jika title sudah digunakan
         const existingTitle = await prisma.event.findFirst({
             where: { title }
         });
@@ -19,17 +16,12 @@ export const createEventService = async (body: CreateEvent, file: Express.Multer
             throw new Error(`Title already in use`);
         }
 
-
         console.log(`userId: ${userId}`);
-
-
 
         const user = await prisma.user.findFirst({ where: { id: Number(userId) } });
         if (!user) {
             throw new Error(`User not found`);
         }
-
-
 
         return await prisma.event.create({
             data: {
@@ -44,11 +36,6 @@ export const createEventService = async (body: CreateEvent, file: Express.Multer
                 location: String(location),
                 price: Number(price), userId: Number(userId)
                 
-                // , EventCategory: {
-                //     create: {
-                //         categoryName: eventCategory.categoryName
-                //     }
-                // }
                 , booked: Number(booked), isFree: Boolean(isFree), category: String(category)
 
             }

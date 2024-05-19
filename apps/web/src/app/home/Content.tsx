@@ -1,12 +1,10 @@
+import { CalendarIcon } from '@radix-ui/react-icons';
 import Image from 'next/image';
-import { Badge } from '../../components/ui/badge';
-import { Button } from '../../components/ui/button';
-import { ButtonIcon } from '@radix-ui/react-icons';
-import Cards from '../events/Cards';
+import { FaMoneyCheckAlt } from 'react-icons/fa';
 import { LuMapPin } from 'react-icons/lu';
 import { MdOutlinePendingActions } from 'react-icons/md';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
-import { CalendarIcon } from '@radix-ui/react-icons';
+import { Badge } from '../../components/ui/badge';
+import { Button } from '../../components/ui/button';
 
 export const Contents = () => {
   return (
