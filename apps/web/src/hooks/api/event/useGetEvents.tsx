@@ -3,7 +3,6 @@
 import { axiosInstance } from '@/lib/axios';
 import { Event } from '@/types/event.type';
 import { IPaginationMeta, IPaginationQueries } from '@/types/pagination.type';
-
 import { useEffect, useState } from 'react';
 
 interface IGetEventsQueries extends IPaginationQueries {

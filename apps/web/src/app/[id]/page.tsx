@@ -1,10 +1,8 @@
 'use client';
 
 import Markdown from '@/components/MarkDown';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import useGetEvent from '@/hooks/api/event/useGetEvent';
-import { useAppSelector } from '@/redux/hooks';
 import { appConfig } from '@/utils/config';
 import { format } from 'date-fns';
 
@@ -28,7 +26,6 @@ const EventDetail = ({ params }: { params: { id: string } }) => {
 
   console.log(params);
 
-  //jika event belum ada maka yang dibawah tidak akan di render
   if (!event) {
     return <div className="container mx-auto px-4">Event not found</div>;
   }

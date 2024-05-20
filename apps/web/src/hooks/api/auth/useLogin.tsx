@@ -1,7 +1,7 @@
 'use client';
 
 import { axiosInstance } from '@/lib/axios';
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { loginAction } from '@/redux/slices/userSlice';
 import { User } from '@/types/user.type';
 import { AxiosError } from 'axios';
@@ -19,6 +19,7 @@ interface LoginResponse {
 
 const useLogin = () => {
     const router = useRouter();
+    const { role } = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
     const login = async (payload: LoginArgs) => {
         try {
@@ -28,7 +29,7 @@ const useLogin = () => {
             );
             dispatch(loginAction(data.data));
             localStorage.setItem('token', data.token);
-            router.replace('/');
+            role === "CUSTOMER" ? router.replace('/') : router.replace('/organizer/');
         } catch (error) {
             //FIX ME: change alert to be toast
             if (error instanceof AxiosError) {

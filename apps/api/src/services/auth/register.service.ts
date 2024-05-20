@@ -1,6 +1,6 @@
 import { hashPassword } from "@/lib/bcrypt";
 import prisma from "@/prisma";
-import { Prisma, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import cuid from "cuid";
 
 export const registerService = async (

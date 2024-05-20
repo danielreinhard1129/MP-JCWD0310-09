@@ -91,36 +91,6 @@ const CreateEvent = () => {
                   value={values.location}
                   label="Location"
                 />
-                {/* <div className="flex justify-start status">
-                <div className="flex mr-5">
-                  <p className="my-auto mr-1">Free</p>
-                  <FormInput
-                    name="isFree"
-                    error={errors.isFree}
-                    isError={!!touched.isFree && !!errors.isFree}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Status"
-                    value={values.isFree}
-                    label=""
-                    type="radio"
-                  />
-                </div>
-                <div className="flex">
-                  <p className="my-auto mr-1">Paid</p>
-                  <FormInput
-                    name="isFree"
-                    error={errors.isFree}
-                    isError={!!touched.isFree && !!errors.isFree}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Status"
-                    value={values.isFree}
-                    label=""
-                    type="radio"
-                  />
-                </div>
-              </div> */}
 
                 <FormInput
                   name="price"

@@ -17,7 +17,7 @@ import {
 export const LandingPage = () => {
   return (
     <>
-      <div className="bg-[url('/camera1.jpg')] w-full h-[screen] bg-cover mx-auto mr-5 relative">
+      <div className="bg-[url('/camera1.jpg')] w-full h-screen bg-cover mx-auto mr-5 relative">
         <nav className=" text-white font-bold relative">
           <div className="mx-auto px-4">
             <div className="flex items-center md:justify-around justify-between">

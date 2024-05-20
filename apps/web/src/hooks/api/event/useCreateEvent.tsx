@@ -20,7 +20,6 @@ const useCreateEvent = () => {
         thumbnail,
         userId,
         remainingTicket,
-        // categoryName,
         category,
       } = payload;
       const createEventForm = new FormData();

@@ -1,9 +1,9 @@
 export enum Gender {
-    Male = 'male',
-    Female = 'female',
+    MALE = 'MALE',
+    FEMALE = 'FEMALE',
 }
 
 export enum Role {
-    Customer = 'customer',
-    EventOrganizer = 'event_organizer',
+    CUSTOMER = 'CUSTOMER',
+    ORGANIZER = 'ORGANIZER',
 }

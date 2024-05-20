@@ -23,10 +23,10 @@ const ForgotPassword = () => {
       });
   return (
     <main className="container mx-auto my-10 px-4">
-      <div className="flex justify-center">
-        <Card className="w-[450px]">
+      <div className="flex justify-center h-screen">
+        <Card className="mt-10 w-[450px] h-[250px]">
           <CardHeader>
-            <CardTitle className="text-center text-3xl text-primary">
+            <CardTitle className="text-center text-3xl text-primary text-[#B66772]">
               Forgot Password
             </CardTitle>
           </CardHeader>
@@ -38,8 +38,8 @@ const ForgotPassword = () => {
                                   name="email"
                                   error={errors.email}
                                   isError={!!touched.email && !!errors.email}
-                                  handleBlur={handleBlur}
-                                  handleChange={handleChange}
+                                  onBlur={handleBlur}
+                                  onChange={handleChange}
                                   placeholder="Email"
                                   type="email"
                                   value={values.email} 
@@ -47,7 +47,7 @@ const ForgotPassword = () => {
                 />
                 {/* EMAIL END */}
               </div>
-            <Button className="mt-6 w-full bg-slate-800 text-white" disabled={isLoading}>
+            <Button className="mt-6 w-full bg-[#B66772] text-white" disabled={isLoading}>
                 { isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" /> }
                 { isLoading ? 'Loading' : 'Submit' }
             </Button>

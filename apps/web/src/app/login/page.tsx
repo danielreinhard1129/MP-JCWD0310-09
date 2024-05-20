@@ -9,7 +9,6 @@ import React from 'react';
 import { validationSchema } from './validationSchema';
 import useLogin from '@/hooks/api/auth/useLogin';
 import { useRouter } from 'next/navigation';
-import AuthGuardUser from '@/hoc/CustomerGuard';
 
 const Login = () => {
   const router = useRouter();
@@ -19,6 +18,7 @@ const Login = () => {
       initialValues: {
         email: '',
         password: '',
+        role: '',
       },
       validationSchema,
       onSubmit: (values) => {
@@ -32,10 +32,10 @@ const Login = () => {
     });
   return (
     <main className="container mx-auto my-10 px-4">
-      <div className="flex justify-center">
-        <Card className="w-[450px]">
+      <div className="flex justify-center h-screen">
+        <Card className="mt-10 w-[450px] h-[350px]">
           <CardHeader>
-            <CardTitle className="text-center text-3xl text-primary">
+            <CardTitle className="text-center text-3xl text-primary text-[#B66772]">
               Login Event War
             </CardTitle>
           </CardHeader>
@@ -71,12 +71,12 @@ const Login = () => {
                 {/* PASSWORD END */}
                 <p
                   className="cursor-pointer text-end text-xs"
-                  onClick={() => router.push('/')}
+                  onClick={() => router.push('/forgot-password')}
                 >
                   Forgot Password?
                 </p>
               </div>
-              <Button className="mt-6 w-full bg-slate-800 text-white">
+              <Button className="mt-6 w-full bg-[#B66772] text-white">
                 Login
               </Button>
             </form>

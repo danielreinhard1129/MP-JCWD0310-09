@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import React from 'react';
 import { validationSchema } from './validationSchema';
 import useRegister from '@/hooks/api/auth/useRegister';
-import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/navigation';
 
 const Register: React.FC = () => {
@@ -19,6 +18,7 @@ const Register: React.FC = () => {
         lastName: '',
         email: '',
         password: '',
+        role: '',
         referralCode: '',
       },
       validationSchema,
@@ -30,11 +30,11 @@ const Register: React.FC = () => {
   return (
     <>
       <main className="container mx-auto my-10 px-4">
-        <div className="flex justify-center">
-          <Card className="w-[450px]">
+        <div className="flex justify-center h-screen">
+          <Card className="mt-10 w-[450px] h-[580px]">
             <CardHeader>
-              <CardTitle className="text-center text-3xl text-primary">
-                Sign Up Event War
+              <CardTitle className="text-center text-3xl text-primary text-[#B66772]">
+                Sign Up Event Warr
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -110,7 +110,7 @@ const Register: React.FC = () => {
                   />
                   {/* REFERRAL END */}
                 </div>
-                <Button className="mt-6 w-full bg-slate-800 text-white"
+                <Button className="mt-6 w-full bg-[#B66772] text-white"
                 onClick={() => router.push('/login')}
                 >
                   Register

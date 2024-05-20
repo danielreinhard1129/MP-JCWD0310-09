@@ -7,12 +7,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Badge } from './ui/badge';
+import { Role } from '@/types/enum.type';
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const { id, role } = useAppSelector((state) => state.user);
+  console.log(role);
+  
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -83,22 +86,24 @@ const Navbar = () => {
                 { role === "ORGANIZER" ? (
                   <div>
                     <Badge
-                      className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
+                      className="bg-[#B66772] rounded-s-full p-2 hover:bg-[#A44F5B] text-base font-normal"
                       onClick={logout}
                     >
                       <Link href={'/login'}>Logout</Link>
                     </Badge>
                     <Badge
-                      className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints"
+                      className="bg-[#B66772] rounded-e-full p-2 hover:bg-[#A44F5B] text-base font-normal"
                       onClick={() => router.push('/create-event')}
                     >
                       <h5>Create Event</h5>
                     </Badge>
                   </div>
+
                 ) : (
+
                   <div>
                     <Badge
-                      className="bg-brown-shades rounded-full p-2 hover:bg-brown-tints"
+                      className="bg-[#B66772] rounded-full p-2 hover:bg-[#A44F5B] text-base font-normal"
                       onClick={logout}
                     >
                       <Link href={'/login'}>Logout</Link>
@@ -121,11 +126,11 @@ const Navbar = () => {
                   <h3 className="contact">Contact</h3>
                 </Link>
                 <div>
-                  <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
+                  <Badge className="bg-[#B66772] rounded-s-full p-2 hover:bg-[#A44F5B] text-base font-normal">
                     <Link href={'/login'}>Log In</Link>
                   </Badge>
                   <Badge
-                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints cursor-pointer"
+                    className="bg-[#B66772] rounded-e-full p-2 hover:bg-[#A44F5B] cursor-pointer text-base font-normal"
                     onClick={() => router.push('/register')}
                   >
                     <h5>Register</h5>

@@ -1,5 +1,4 @@
 import { EventController } from '@/controllers/event.controller';
-import { SampleController } from '@/controllers/sample.controller';
 import { verifyToken } from '@/lib/jwt';
 import { uploader } from '@/lib/uploader';
 import { Router } from 'express';
@@ -18,7 +17,7 @@ export class EventRouter {
         this.router.post('/', verifyToken, uploader("IMG", "/images").array("thumbnail", 1), this.eventController.createEventController);
         this.router.get('/', this.eventController.getEventsController);
         this.router.get('/:id', this.eventController.getEventController);
-
+        this.router.get('/organizer', this.eventController.getEventsByOrganizerController);
     }
 
     getRouter(): Router {

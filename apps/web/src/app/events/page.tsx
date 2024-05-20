@@ -1,21 +1,13 @@
 'use client';
-import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 import { Input } from '@/components/ui/input';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import useGetEvent from '@/hooks/api/event/useGetEvent';
 import { cn } from '@/lib/utils';
 import {
   DropdownMenu,
@@ -27,24 +19,13 @@ import {
   DropdownMenuTrigger,
 } from '@radix-ui/react-dropdown-menu';
 import { CalendarIcon } from '@radix-ui/react-icons';
-import { format, setDate } from 'date-fns';
-import Image from 'next/image';
+import { format } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
-import { LuMapPin } from 'react-icons/lu';
-import { MdOutlinePendingActions } from 'react-icons/md';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
-import Cards from './Cards';
-import useGetEvent from '@/hooks/api/event/useGetEvent';
-import { notFound } from 'next/navigation';
 
 const Events = ({ params }: { params: { id: string } }) => {
   const [date, setDate] = React.useState<Date>();
   const { event } = useGetEvent(Number(params.id));
-
-  // if (!event) {
-  //   return notFound();
-  // }
 
   return (
     <>

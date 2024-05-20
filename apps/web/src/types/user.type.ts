@@ -7,7 +7,7 @@ export interface User {
     firstName: string;
     lastName: string;
     email: string;
-    role?: string;
+    role: string;
     password?: string;
     referralCode?: string
     userDetail?: UserDetail;
