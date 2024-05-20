@@ -7,14 +7,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Badge } from './ui/badge';
+import { Menu } from 'lucide-react';
+import { Hamburger } from './Hamburger';
 
 const Navbar = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const { id } = useAppSelector((state) => state.user);
-
-
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -69,19 +69,11 @@ const Navbar = () => {
             </div>
 
             {Boolean(id) ? (
-              <div className="flex items-center gap-8 ml-5">
+              <div className="md:flex items-center gap-8 ml-5 hidden">
                 <Link href={'/events'}>
                   <h3 className="events">Events</h3>
                 </Link>
-                <Link href={'/venues'}>
-                  <h3 className="venue">Venues</h3>
-                </Link>
-                <Link href={'/about'}>
-                  <h3 className="about">About</h3>
-                </Link>
-                <Link href={'/contact'}>
-                  <h3 className="contact">Contact</h3>
-                </Link>
+
                 <div>
                   <Badge
                     className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints"
@@ -90,27 +82,22 @@ const Navbar = () => {
                     <Link href={'/login'}>Logout</Link>
                   </Badge>
                   <Badge
-                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints"
+                    className="bg-brown-shades rounded-e-full p-2 hover:bg-brown-tints cursor-pointer"
                     onClick={() => router.push('/create-event')}
                   >
                     <h5>Create Event</h5>
                   </Badge>
                 </div>
+                <div className="md:hidden flex">
+                  <Hamburger />
+                </div>
               </div>
             ) : (
-              <div className="flex items-center gap-8 ml-5">
+              <div className="md:flex items-center gap-8 ml-5 hidden">
                 <Link href={'/events'}>
                   <h3 className="events">Events</h3>
                 </Link>
-                <Link href={'/venues'}>
-                  <h3 className="venue">Venues</h3>
-                </Link>
-                <Link href={'/about'}>
-                  <h3 className="about">About</h3>
-                </Link>
-                <Link href={'/contact'}>
-                  <h3 className="contact">Contact</h3>
-                </Link>
+
                 <div>
                   <Badge className="bg-brown-shades rounded-s-full p-2 hover:bg-brown-tints">
                     <Link href={'/login'}>Log In</Link>
@@ -121,6 +108,9 @@ const Navbar = () => {
                   >
                     <h5>Register</h5>
                   </Badge>
+                </div>
+                <div className="md:hidden flex">
+                  <Hamburger />
                 </div>
               </div>
             )}

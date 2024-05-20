@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Badge } from '../../components/ui/badge';
 import { Button } from '../../components/ui/button';
 import { ButtonIcon } from '@radix-ui/react-icons';
-import Cards from '../events/Cards';
+import Cards from '../events/components/Cards';
 import { LuMapPin } from 'react-icons/lu';
 import { MdOutlinePendingActions } from 'react-icons/md';
 import { FaMoneyCheckAlt } from 'react-icons/fa';

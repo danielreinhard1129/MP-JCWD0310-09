@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import Header from './components/header';
+import Header from './edit/components/header';
 import { notFound } from 'next/navigation';
 
 const EventDetail = ({ params }: { params: { id: string } }) => {

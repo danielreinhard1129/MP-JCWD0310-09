@@ -3,5 +3,7 @@ export interface PaginationQueryParams {
     page: number;
     sortBy: string;
     sortOrder: string;
+
+
 }
 

@@ -9,7 +9,7 @@ const Homes = () => {
     <>
       <LandingPage />
       <NewestEvents />
-      <Contents />
+      {/* <Contents /> */}
       <TagLine />
     </>
   );

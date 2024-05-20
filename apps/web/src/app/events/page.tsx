@@ -30,17 +30,43 @@ import { CalendarIcon } from '@radix-ui/react-icons';
 import { format, setDate } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { FC, useState } from 'react';
 import { LuMapPin } from 'react-icons/lu';
 import { MdOutlinePendingActions } from 'react-icons/md';
 import { FaMoneyCheckAlt } from 'react-icons/fa';
-import Cards from './Cards';
+import Cards from './components/Cards';
 import useGetEvent from '@/hooks/api/event/useGetEvent';
-import { notFound } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
+
+import { appConfig } from '@/utils/config';
+
+import LocationAutoComplete from '@/components/AutoComplete';
+import Pagination from '@/components/pagination';
+import EventCard from '@/components/EventCard';
+import useGetEvents from '@/hooks/api/event/useGetEvents';
+import AutoComplete from '@/components/AutoComplete';
+import CategoryCard from '@/components/CategoryCard';
 
 const Events = ({ params }: { params: { id: string } }) => {
   const [date, setDate] = React.useState<Date>();
   const { event } = useGetEvent(Number(params.id));
+  const [page, setPage] = useState<number>(1);
+  const { data: events, meta } = useGetEvents({
+    page,
+    take: 3,
+  });
+  const handleChangePaginate = ({ selected }: { selected: number }) => {
+    setPage(selected + 1);
+  };
+  const uniqueCategories = new Set();
+  const filteredEvents = events.filter((event) => {
+    if (uniqueCategories.has(event.category)) {
+      return false;
+    } else {
+      uniqueCategories.add(event.category);
+      return true;
+    }
+  });
 
   // if (!event) {
   //   return notFound();
@@ -49,158 +75,60 @@ const Events = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <div className="bg-[url('/bg-events.jpg')] bg-cover w-full h-[300px] text-white">
-        <div className="container mx-auto text-center grid grid-cols-5 justify-center h-full ">
-          <div className="my-auto">
-            <Input
-              type="Events"
-              placeholder="Search Event"
-              className="text-center"
-            />
-          </div>
-
-          {/* Category */}
-          <div className=" my-auto ">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-3/4">
-                  Category
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-48 text-center">
-                <DropdownMenuLabel>Categories</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup>
-                  <DropdownMenuRadioItem value="sports">
-                    <Link href={'/'}>
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Sports
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="travels">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Travels
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="festival">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Festival
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="nightlife">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        NightLife
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* Status */}
-          <div className="my-auto">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="w-3/4">
-                  Status
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuLabel>Status</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup>
-                  <DropdownMenuRadioItem value="upcoming">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Upcoming
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="showing">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Showing
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="expired">
-                    <Link href={'/'}>
-                      {' '}
-                      <p className="hover:text-maroon-tints hover:border-b">
-                        Expired
-                      </p>
-                    </Link>
-                  </DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* Calendar */}
-          <div className="my-auto">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={'outline'}
-                  className={cn(
-                    'w-3/4 justify-start text-left font-normal',
-                    !date && 'text-muted-foreground',
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {date ? format(date, 'PPP') : <span>Select Date</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  className="bg-woodsmokey text-whites rounded-md"
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-          <div className="my-auto">
-            <Button
-              className="w-3/4 bg-brown-tints hover:bg-transparent"
-              variant="outline"
-            >
-              SEARCH
-            </Button>
-          </div>
+        {/* Title */}
+        <div className="my-auto ">{/* <TitleAutoComplete /> */}</div>
+        <div className="mx-auto flex justify-center">
+          <h3 className="text-whites text-3xl font-semibold relative top-24 left-5">
+            EVENTWARR{' '}
+            <span className="text-black font-semibold text-3xl">LIST</span>
+          </h3>
         </div>
+
+        {/* Category */}
+        <div className=" my-auto ">{/* <CategoryAutoComplete /> */}</div>
+
+        {/* Location */}
+        <div className="my-auto">{/* <AutoComplete /> */}</div>
       </div>
 
-      <div className="container grid grid-cols-3 mb-10 gap-5">
-        {/* {event.map((event, index) => {
-          return (
-            <Cards
-              key={index}
-              title={event}
-              availableTicket={event}
-              category={event}
-              description={event}
-              endDate={event}
-              location={event}
-              price={event}
-              startDate={event}
-              thumbnail={event}
-            />
-          );
-        })} */}
+      {/* Category Title */}
+      <section>
+        <div className="container flex mb-10 justify-center mx-auto mt-10 gap-10">
+          {filteredEvents.map((event, index) => {
+            return <CategoryCard key={index} category={event.category} />;
+          })}
+        </div>
+      </section>
+
+      <div className="container grid grid-cols-3 mb-10 gap-5"></div>
+
+      {/* Cards */}
+      <div>
+        <section className="grid grid-cols-3 gap-4">
+          {events.map((event, index) => {
+            return (
+              <EventCard
+                key={index}
+                title={event.title}
+                // author={event.user}
+                category={event.category}
+                createdAt={new Date(event.createdAt)}
+                description={event.description}
+                imageUrl={appConfig.baseUrl + `/assets${event.thumbnail}`}
+                eventId={event.id}
+                location={event.location}
+              />
+            );
+          })}
+        </section>
+
+        <div className="my-8 flex justify-center">
+          <Pagination
+            total={meta?.total || 0}
+            take={meta?.take || 0}
+            onChangePage={handleChangePaginate}
+          />
+        </div>
       </div>
     </>
   );

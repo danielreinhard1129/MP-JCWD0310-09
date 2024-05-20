@@ -13,11 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
+import AutoComplete from '@/components/AutoComplete';
 
 export const LandingPage = () => {
   return (
     <>
-      <div className="bg-[url('/camera1.jpg')] w-full h-[screen] bg-cover mx-auto mr-5 relative">
+      <div className="bg-[url('/camera1.jpg')] w-full h-[calc(100vh-6rem)] bg-cover mx-auto mr-5 relative">
         <nav className=" text-white font-bold relative">
           <div className="mx-auto px-4">
             <div className="flex items-center md:justify-around justify-between">
@@ -26,7 +27,7 @@ export const LandingPage = () => {
           </div>
         </nav>
 
-        <div className="mx-auto md:w-[500px] w-full h-32  mt-44 text-white">
+        <div className="mx-auto md:w-[500px] w-full h-32  md:mt-44  mt-14 text-white">
           <h1 className="md:text-4xl text-2xl font-extrabold mb-2 md:ml-0 ml-12">
             Bringing Moments To Life
           </h1>
@@ -36,61 +37,9 @@ export const LandingPage = () => {
         </div>
 
         <div>
-          <Link href={'/events'}>
-            <Button className="bg-brown-shades mx-auto flex justify-center outline hover:bg-brown-tints hover:text-white">
-              <h3 className="font-semibold text-white">Explore Your Events</h3>
-            </Button>
-          </Link>
-        </div>
-
-        <div className="container mx-auto w-[screen] h-32 mt-28 grid grid-cols-4  text-white">
-          <div className=" bg-blackless  text-white">
-            <Image
-              className="mx-auto w-20 h-20 "
-              src="/sports.gif"
-              alt="sports.jpg"
-              height={100}
-              width={100}
-            ></Image>
-
-            <div className="mx-auto font-bold text-center">Sports</div>
-          </div>
-
-          <div className=" bg-blackless ">
-            <Image
-              className="mx-auto w-20 h-20"
-              src="/travel.gif"
-              alt="travel.jpg"
-              height={100}
-              width={100}
-            ></Image>
-
-            <div className="mx-auto font-bold text-center">Travel</div>
-          </div>
-
-          <div className=" bg-blackless ">
-            <Image
-              className="mx-auto w-20 h-20"
-              src="/party.gif"
-              alt="party.jpg"
-              height={135}
-              width={135}
-            ></Image>
-
-            <div className="mx-auto font-bold text-center">Festival</div>
-          </div>
-
-          <div className=" bg-blackless">
-            <Image
-              className="mx-auto w-20 h-20"
-              src="/nightlife.gif"
-              alt="nightlife.jpg"
-              height={100}
-              width={100}
-            ></Image>
-
-            <div className="mx-auto font-bold text-center">NightLife</div>
-          </div>
+          <h3 className="font-semibold text-white">
+            <AutoComplete />
+          </h3>
         </div>
       </div>
     </>

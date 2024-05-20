@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <div className="bg-[url('/nodepad.png')] bg-cover w-full md:h-[400px] text-white">
-        <div className="grid md:grid-cols-3 grid-cols-1">
+        <div className="grid md:grid-cols-2 grid-cols-1">
           {/* About  */}
           <div className="md:ml-10 md:mr-5 ml-2">
             <Image
@@ -21,22 +21,6 @@ const Footer = () => {
               EventWarr is a web platform that provides various types of tickets
               at very affordable prices
             </h1>
-          </div>
-
-          {/* Newsletter */}
-          <div className="md:mt-24 mt-5 p-2">
-            <h1 className="text-xl mb-5">NEWSLETTER</h1>
-            <h3 className="text-md">Dont miss a thing</h3>
-            <h3 className="text-md">Sign up to receive newest tickets</h3>
-
-            <Input
-              type="Email"
-              className="mt-5 text-center"
-              placeholder="Your Email Address"
-            />
-            <Button className="w-full mt-5 bg-brown-shades hover:bg-brown-tints">
-              Sign Up
-            </Button>
           </div>
 
           {/* Contact */}

@@ -1,7 +1,7 @@
 import prisma from "@/prisma"
-import { PaginationQueryParams } from "@/types/pagination.types";
-import { Prisma } from "@prisma/client"
+import { PaginationQueryParams } from "@/types/pagination.types.ts";
 
+import { Prisma } from "@prisma/client"
 
 interface GetEvensQuery extends PaginationQueryParams {
     search: string;
@@ -34,7 +34,6 @@ export const getEventsService = async (query: GetEvensQuery) => {
             meta: { page, take, total: count },
         };
 
-        return events
     } catch (error) {
 
     }

@@ -13,6 +13,14 @@ import { useFormik } from 'formik';
 import Image from 'next/image';
 import React from 'react';
 import { validationSchema } from './validationSchema';
+import AuthGuard from '@/hoc/AuthGuard';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const CreateEvent = () => {
   const { createEvent } = useCreateEvent();
@@ -39,7 +47,7 @@ const CreateEvent = () => {
       // categoryName: '',
       category: '',
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       createEvent({ ...values, userId: id });
     },
@@ -89,36 +97,49 @@ const CreateEvent = () => {
                   value={values.location}
                   label="Location"
                 />
+
+                {/* <Select>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={''}>Travel</SelectItem>
+                    <SelectItem value={''}>Festival</SelectItem>
+                    <SelectItem value={''}>Sports</SelectItem>
+                    <SelectItem value={''}>Night Life</SelectItem>
+                  </SelectContent>
+                </Select> */}
+
                 {/* <div className="flex justify-start status">
-                <div className="flex mr-5">
-                  <p className="my-auto mr-1">Free</p>
-                  <FormInput
-                    name="isFree"
-                    error={errors.isFree}
-                    isError={!!touched.isFree && !!errors.isFree}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Status"
-                    value={values.isFree}
-                    label=""
-                    type="radio"
-                  />
-                </div>
-                <div className="flex">
-                  <p className="my-auto mr-1">Paid</p>
-                  <FormInput
-                    name="isFree"
-                    error={errors.isFree}
-                    isError={!!touched.isFree && !!errors.isFree}
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    placeholder="Status"
-                    value={values.isFree}
-                    label=""
-                    type="radio"
-                  />
-                </div>
-              </div> */}
+                  <div className="flex mr-5">
+                    <p className="my-auto mr-1">Free</p>
+                    <FormInput
+                      name="isFree"
+                      error={errors.location}
+                      isError={!!touched.location && !!errors.location}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder="Status"
+                      value={values.location}
+                      label=""
+                      type="radio"
+                    />
+                  </div>
+                  <div className="flex">
+                    <p className="my-auto mr-1">Paid</p>
+                    <FormInput
+                      name="isFree"
+                      error={errors.location}
+                      isError={!!touched.location && !!errors.location}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      placeholder="Status"
+                      value={values.location}
+                      label=""
+                      type="radio"
+                    />
+                  </div>
+                </div> */}
 
                 <FormInput
                   name="price"
@@ -126,7 +147,7 @@ const CreateEvent = () => {
                   isError={!!touched.price && !!errors.price}
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  placeholder="Price (Input 0 if your event is free)"
+                  placeholder="Rp"
                   type="number"
                   value={values.price}
                   label="Price "
@@ -210,4 +231,4 @@ const CreateEvent = () => {
   );
 };
 
-export default CreateEvent;
+export default AuthGuard(CreateEvent);

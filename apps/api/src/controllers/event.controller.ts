@@ -38,8 +38,9 @@ export class EventController {
                 sortBy: (req.query.sortBy as string) || 'createdAt',
                 sortOrder: (req.query.sortOrder as string) || 'desc',
                 search: (req.query.search as string) || '',
+
             };
-            const result = await getEventsService(query);
+            const result = await getEventsService(query)
 
             return res.status(200).send(result);
         } catch (error) {
